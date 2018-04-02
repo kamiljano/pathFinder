@@ -15,7 +15,7 @@ module.exports.findRepositories = address => {
         await request.get(url);
         console.log(`Positive result at ${url}.`);
       } catch (err) {
-        console.debug(`Nothing found for ${url}`);
+        //console.debug(`Nothing found for ${url}`);
       }
     }));
   }));
