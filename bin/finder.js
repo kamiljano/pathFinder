@@ -15,7 +15,7 @@ class PathFinder {
   }
 
   find(ipAddress) {
-    Promise.all(Object.entries(PORT_PROTOCOL_MATRIX).map(([protocol, ports]) => {
+    return Promise.all(Object.entries(PORT_PROTOCOL_MATRIX).map(([protocol, ports]) => {
       return Promise.all(ports.map(async port => {
         const url = urlUtil.resolve(`${protocol}://${ipAddress}:${port}`, this.path);
         try {
