@@ -11,7 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.218.1",
     "command-line-args": "^5.0.2",
-    "ipterate": "^1.1.0",
+    "ipterate": "^1.1.1",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
   },

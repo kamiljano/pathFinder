@@ -10,8 +10,9 @@ const PORT_PROTOCOL_MATRIX = Object.freeze({
 });
 
 class PathFinder {
-  constructor(path) {
+  constructor(path, contentRegex) {
     this.path = path;
+    this.contentRegex = contentRegex;
   }
 
   find(ipAddress) {
@@ -19,9 +20,16 @@ class PathFinder {
       return Promise.all(ports.map(async port => {
         const url = urlUtil.resolve(`${protocol}://${ipAddress}:${port}`, this.path);
         try {
-          await request.get(url);
-          console.log(`Positive result at ${url}.`);
-          reportingService.updateReport(this.path, url);
+          const result = await request.get({
+            url,
+            timeout: 3000
+          });
+          if ((typeof result === 'string' && (!this.contentRegex || result.match(this.contentRegex))) || (typeof result !== 'undefined' && typeof result !== 'string')) {
+            console.log(`Positive result at ${url}.`);
+            reportingService.updateReport(this.path, url);
+          } else {
+            console.debug(`Content found at ${url} does not meet the content check requirements`);
+          }
         } catch (err) {
           console.debug(`Nothing found for ${url}`);
         }
