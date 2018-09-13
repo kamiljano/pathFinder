@@ -6,14 +6,10 @@ which can scale to numbers where the result can be acquired much faster.**
 
 # About
 
-PathFinder scans all IP addresses on the internet to find those that provide content through HTTP/HTTPS protocool
-under the specified path.
+PathFinder scans all IP addresses on the internet to find those that provide content through HTTP/HTTPS protocol
+under the specified path. Useful if you want to find all git repositories that were accidentally uploaded
+to HTTP servers
 
-# Usage
+# Debugging
 
-    node app.js --path /wp-admin
-    
-# Other
-    
-The command above will send a request to all IPs v4 with the HTTP (ports 80, 8080, 9080) and HTTPS (ports 443, 9443)
-protocol with the path `/wp-admin` resulting in building a report of all WordPress pages visible to the internet.
+    go run main.go "/.git/HEAD" "refs/heads/master"
